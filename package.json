@@ -2,10 +2,11 @@
   "name": "typestill-graphql-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "compile": "tsc",
-    "start": "npm run compile && node ./dist/index.js",
+    "build": "tsc",
+    "start": "node lib/index.js",
+    "start:ts": "ts-node src/index.ts",
     "dev": "ts-node-dev src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "bootstrap": "rm -rf node_modules && npm install"

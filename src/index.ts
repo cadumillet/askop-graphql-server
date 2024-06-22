@@ -1,17 +1,16 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./typedefs";
-import { models } from "./db/models";
 
 // Resolvers define how to fetch the types defined in your schema.
 // This resolver retrieves books from the "books" array above.
 const resolvers = {
   Query: {
-    projects: () => models.Project.findMany({}),
+    projects: () => [],
     creators: () => [],
   },
   Mutation: {
-    createProject: (_, { input }) => input,
+    createProject: (_: any, { input }: any) => input,
   },
 };
 
