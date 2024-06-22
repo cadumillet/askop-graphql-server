@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "test@test.com",
+      "password": "123456",
+      "role": "admin",
+      "createdAt": "2021-01-01T00:00:00.000Z",
+      "updatedAt": "2021-01-01T00:00:00.000Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "Project 1",
+      "description": "Description 1",
+      "cover": "cover1.jpg",
+      "author": "1",
+      "creators": ["1"],
+      "views": 0,
+      "published": true,
+      "createdAt": "2021-01-01T00:00:00.000Z",
+      "updatedAt": "2021-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Project 2",
+      "description": "Description 2",
+      "cover": "cover2.jpg",
+      "author": "1",
+      "creators": ["1"],
+      "views": 0,
+      "published": true,
+      "createdAt": "2021-01-01T00:00:00.000Z",
+      "updatedAt": "2021-01-01T00:00:00.000Z"
+    }
+  ]
+}

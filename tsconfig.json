@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
-    "rootDirs": ["src"],
-    "outDir": "dist",
-    "lib": ["es2020"],
-    "target": "es2020",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "target": "es2016",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "moduleResolution": "Node",
     "esModuleInterop": true,
-    "types": ["node"]
-    // "baseUrl": ".",
-    // "paths": {
-    //   "*": ["*"]
-    // }
-  }
+    "forceConsistentCasingInFileNames": true,
+    // "strict": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "dist"]
 }

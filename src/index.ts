@@ -1,33 +1,17 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { typeDefs } from "./typedefs.js";
-
-const zines = [
-  {
-    title: "The Awakening",
-    author: {
-      firstName: "Carlos",
-      lastName: "Millet",
-    },
-  },
-  {
-    title: "City of Glass",
-    author: {
-      firstName: "George",
-      lastName: "Benson",
-    },
-  },
-];
+import { typeDefs } from "./typedefs";
+import { models } from "./db/models";
 
 // Resolvers define how to fetch the types defined in your schema.
 // This resolver retrieves books from the "books" array above.
 const resolvers = {
   Query: {
-    zines: () => zines,
+    projects: () => models.Project.findMany({}),
     creators: () => [],
   },
   Mutation: {
-    createZine: (_, { input }) => input,
+    createProject: (_, { input }) => input,
   },
 };
 
@@ -42,8 +26,6 @@ const server = new ApolloServer({
 //  1. creates an Express app
 //  2. installs your ApolloServer instance as middleware
 //  3. prepares your app to handle incoming requests
-const { url } = await startStandaloneServer(server, {
+startStandaloneServer(server, {
   listen: { port: 4000 },
-});
-
-console.log(`🚀  Server ready at: ${url}`);
+}).then(({ url }) => console.log(`🚀  Server ready at: ${url}`));
