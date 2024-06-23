@@ -1,18 +1,11 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { typeDefs } from "./typedefs";
+import "dotenv/config";
 
-// Resolvers define how to fetch the types defined in your schema.
-// This resolver retrieves books from the "books" array above.
-const resolvers = {
-  Query: {
-    projects: () => [],
-    creators: () => [],
-  },
-  Mutation: {
-    createProject: (_: any, { input }: any) => input,
-  },
-};
+import connectDb from "./database";
+
+import typeDefs from "./typeDefs";
+import resolvers from "./resolvers";
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
@@ -20,6 +13,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
+
+connectDb();
 
 // Passing an ApolloServer instance to the `startStandaloneServer` function:
 //  1. creates an Express app
