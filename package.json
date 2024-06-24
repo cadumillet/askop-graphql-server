@@ -15,11 +15,13 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.10.4",
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.6",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "graphql": "^16.8.2",
-    "lowdb": "^7.0.1",
-    "mongodb": "^6.7.0",
-    "uuid": "^10.0.0"
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.7.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.7",

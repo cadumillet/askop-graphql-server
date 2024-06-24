@@ -1,5 +1,7 @@
 const typeDefs = `#graphql
-    type Query {
+  scalar Date
+  
+  type Query {
     _: Boolean
   }
   type Mutation {

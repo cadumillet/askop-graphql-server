@@ -2,31 +2,25 @@ const typeDefs = `#graphql
   type User {
     id: ID!
     email: String!
-    firstName: String!
-    lastName: String!
+    password: String!
+    firstName: String
+    lastName: String
     projects: [Project]
-    verified: Boolean!
-    settings: Settings!
-    createdAt: String!
+    verified: Boolean
+    settings: Settings
+    createdAt: Date!
+    lastModified: Date!
   }
   type AuthUser {
     token: String!
     user: User!
   }
-  input SigninInput {
-    email: String!
-    password: String!
-  }
-  input SignupInput {
-    email: String!
-    password: String!
-  }
   extend type Query {
     users: [User] # creators
   }
   extend type Mutation {
-    signup(input: SignupInput!): AuthUser!
-    signin(input: SigninInput!): AuthUser!
+    signup(email: String!, password: String!): AuthUser!
+    signin(email: String!, password: String!): AuthUser!
   }
 `;
 
