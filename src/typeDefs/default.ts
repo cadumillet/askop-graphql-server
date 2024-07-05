@@ -1,5 +1,6 @@
 const typeDefs = `#graphql
   scalar Date
+  scalar ObjectId
   
   type Query {
     _: Boolean
