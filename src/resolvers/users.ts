@@ -7,7 +7,7 @@ const resolvers: Resolvers = {
     users: async () => Users.find().toArray(),
   },
   Mutation: {
-    signin: async (_: any, { email, password }: any) => {
+    signin: async (_, { email, password }) => {
       const user = await Users.findOne({ email });
       if (!user) {
         throw new Error("Email or password incorrect");
@@ -33,7 +33,7 @@ const resolvers: Resolvers = {
         password: hash,
         verified: false,
         createdAt: new Date(),
-        lastModified: new Date(),
+        updatedAt: new Date(),
       });
 
       const user = await Users.findOne({ _id: newUserId });

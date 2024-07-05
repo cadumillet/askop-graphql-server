@@ -55,7 +55,7 @@ export type Mutation = {
 
 
 export type MutationCreateProjectArgs = {
-  input: ProjectContent;
+  input: ProjectInput;
 };
 
 
@@ -76,17 +76,17 @@ export type Project = {
   author: Scalars['ObjectId']['output'];
   content?: Maybe<Array<ContentBlock>>;
   cover: Scalars['String']['output'];
-  createdAt: Scalars['String']['output'];
+  createdAt: Scalars['Date']['output'];
   creators?: Maybe<Array<Maybe<Scalars['ObjectId']['output']>>>;
   description?: Maybe<Scalars['String']['output']>;
   published: Scalars['Boolean']['output'];
   slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
-  updatedAt: Scalars['String']['output'];
+  updatedAt: Scalars['Date']['output'];
   views: Scalars['Int']['output'];
 };
 
-export type ProjectContent = {
+export type ProjectInput = {
   cover: Scalars['String']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
   published: Scalars['Boolean']['input'];
@@ -113,11 +113,11 @@ export type User = {
   createdAt: Scalars['Date']['output'];
   email: Scalars['String']['output'];
   firstName?: Maybe<Scalars['String']['output']>;
-  lastModified: Scalars['Date']['output'];
   lastName?: Maybe<Scalars['String']['output']>;
   password: Scalars['String']['output'];
   projects?: Maybe<Array<Maybe<Project>>>;
   settings?: Maybe<Settings>;
+  updatedAt: Scalars['Date']['output'];
   verified?: Maybe<Scalars['Boolean']['output']>;
 };
 
@@ -204,7 +204,7 @@ export type ResolversTypes = ResolversObject<{
   Mutation: ResolverTypeWrapper<{}>;
   ObjectId: ResolverTypeWrapper<Scalars['ObjectId']['output']>;
   Project: ResolverTypeWrapper<Project>;
-  ProjectContent: ProjectContent;
+  ProjectInput: ProjectInput;
   Query: ResolverTypeWrapper<{}>;
   Settings: ResolverTypeWrapper<Settings>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
@@ -222,7 +222,7 @@ export type ResolversParentTypes = ResolversObject<{
   Mutation: {};
   ObjectId: Scalars['ObjectId']['output'];
   Project: Project;
-  ProjectContent: ProjectContent;
+  ProjectInput: ProjectInput;
   Query: {};
   Settings: Settings;
   String: Scalars['String']['output'];
@@ -264,13 +264,13 @@ export type ProjectResolvers<ContextType = any, ParentType extends ResolversPare
   author?: Resolver<ResolversTypes['ObjectId'], ParentType, ContextType>;
   content?: Resolver<Maybe<Array<ResolversTypes['ContentBlock']>>, ParentType, ContextType>;
   cover?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   creators?: Resolver<Maybe<Array<Maybe<ResolversTypes['ObjectId']>>>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   published?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   views?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -293,11 +293,11 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  lastModified?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType>;
   settings?: Resolver<Maybe<ResolversTypes['Settings']>, ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   verified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

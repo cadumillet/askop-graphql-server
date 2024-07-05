@@ -8,8 +8,8 @@ const typeDefs = `#graphql
     creators: [ObjectId]
     views: Int!
     published: Boolean!
-    createdAt: String!
-    updatedAt: String!
+    createdAt: Date!
+    updatedAt: Date!
     slug: String!
     content: [ContentBlock!]
   }
@@ -30,7 +30,7 @@ const typeDefs = `#graphql
     MARKDOWN
     HTML
   }
-  input ProjectContent {
+  input ProjectInput {
     title: String!
     cover: String!
     description: String
@@ -40,7 +40,7 @@ const typeDefs = `#graphql
     projects: [Project]
   }
   extend type Mutation {
-    createProject(input: ProjectContent!): Project
+    createProject(input: ProjectInput!): Project
   }
 `;
 

@@ -18,5 +18,6 @@ export default async () => {
 
   return {
     Users,
+    Projects,
   };
 };

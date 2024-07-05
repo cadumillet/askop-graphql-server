@@ -9,7 +9,7 @@ const typeDefs = `#graphql
     verified: Boolean
     settings: Settings
     createdAt: Date!
-    lastModified: Date!
+    updatedAt: Date!
   }
   type AuthUser {
     token: String!

@@ -6,12 +6,14 @@ import connectDb from "./database";
 
 import typeDefs from "./typeDefs";
 import resolvers from "./resolvers";
+import { getUserFromToken } from "./auth";
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  // includeStacktraceInErrorResponses: false,
 });
 
 connectDb();
@@ -22,4 +24,9 @@ connectDb();
 //  3. prepares your app to handle incoming requests
 startStandaloneServer(server, {
   listen: { port: 4000 },
+  context: async ({ req }) => {
+    const token = req.headers.authorization || "";
+    const user = await getUserFromToken(token);
+    return { user };
+  },
 }).then(({ url }) => console.log(`🚀  Server ready at: ${url}`));
