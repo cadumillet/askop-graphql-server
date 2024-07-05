@@ -5,7 +5,7 @@ const typeDefs = `#graphql
     description: String
     cover: String!
     author: ObjectId!
-    creators: [ObjectId]!
+    creators: [ObjectId]
     views: Int!
     published: Boolean!
     createdAt: String!

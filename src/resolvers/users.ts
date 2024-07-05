@@ -1,7 +1,8 @@
 import { comparePassword, generateToken, hashPassword } from "../auth";
 import { Users } from "../database";
+import { Resolvers } from "../types/resolvers";
 
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
     users: async () => Users.find().toArray(),
   },

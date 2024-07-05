@@ -1,6 +1,6 @@
 const typeDefs = `#graphql
   type User {
-    _id: ID!
+    _id: ObjectId!
     email: String!
     password: String!
     firstName: String
@@ -13,14 +13,14 @@ const typeDefs = `#graphql
   }
   type AuthUser {
     token: String!
-    user: User!
+    user: User
   }
   extend type Query {
     users: [User] # creators
   }
   extend type Mutation {
-    signup(email: String!, password: String!): AuthUser!
-    signin(email: String!, password: String!): AuthUser!
+    signup(email: String!, password: String!): AuthUser
+    signin(email: String!, password: String!): AuthUser
   }
 `;
 

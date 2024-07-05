@@ -18,7 +18,6 @@ const resolvers: Resolvers = {
         createdAt: formatDate(new Date()),
         updatedAt: formatDate(new Date()),
         author: "",
-        creators: [],
         // TODO: add author from context (authenticated user)
         slug,
       });
