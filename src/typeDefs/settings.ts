@@ -1,6 +1,6 @@
 const typeDefs = `#graphql
   type Settings {
-    id: ID!
+    _id: ID!
     user: User!
     emailNotifications: Boolean!
   }
