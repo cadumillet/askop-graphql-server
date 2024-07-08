@@ -1,11 +1,11 @@
 const typeDefs = `#graphql
   type Project {
-    _id: ObjectId!
+    _id: ID!
     title: String!
     description: String
     cover: String!
-    author: ObjectId!
-    creators: [ObjectId]
+    author: ID!
+    creators: [ID]
     views: Int!
     published: Boolean!
     createdAt: Date!
@@ -14,7 +14,7 @@ const typeDefs = `#graphql
     content: [ContentBlock!]
   }
   type ContentBlock {
-    _id: ObjectId!
+    _id: ID!
     type: ContentType!
     content: String!
     order: Int!
@@ -41,6 +41,7 @@ const typeDefs = `#graphql
   }
   extend type Mutation {
     createProject(input: ProjectInput!): Project
+    deleteProject(id: ID!): Project
   }
 `;
 

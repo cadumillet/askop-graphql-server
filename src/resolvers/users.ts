@@ -4,7 +4,10 @@ import { Resolvers } from "../types/resolvers";
 
 const resolvers: Resolvers = {
   Query: {
-    users: async () => Users.find().toArray(),
+    users: async () => {
+      const users = await Users.find().toArray();
+      return users.map((user) => ({ ...user, _id: user._id.toString() }));
+    },
   },
   Mutation: {
     signin: async (_, { email, password }) => {
@@ -18,7 +21,7 @@ const resolvers: Resolvers = {
       }
 
       const token = generateToken(user);
-      return { token, user };
+      return { token, user: { ...user, _id: user._id.toString() } };
     },
     signup: async (_: any, { email, password }: any) => {
       const existingUser = await Users.findOne({ email });
@@ -37,9 +40,12 @@ const resolvers: Resolvers = {
       });
 
       const user = await Users.findOne({ _id: newUserId });
+      if (!user) {
+        throw new Error("Email or password incorrect");
+      }
 
       const token = generateToken(user);
-      return { token, user };
+      return { token, user: { ...user, _id: user._id.toString() } };
     },
   },
 };

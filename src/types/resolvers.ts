@@ -21,12 +21,12 @@ export type Scalars = {
 export type AuthUser = {
   __typename?: 'AuthUser';
   token: Scalars['String']['output'];
-  user?: Maybe<User>;
+  user: User;
 };
 
 export type ContentBlock = {
   __typename?: 'ContentBlock';
-  _id: Scalars['ObjectId']['output'];
+  _id: Scalars['ID']['output'];
   content: Scalars['String']['output'];
   format: ContentFormat;
   order: Scalars['Int']['output'];
@@ -49,13 +49,19 @@ export type Mutation = {
   __typename?: 'Mutation';
   _?: Maybe<Scalars['Boolean']['output']>;
   createProject?: Maybe<Project>;
-  signin?: Maybe<AuthUser>;
-  signup?: Maybe<AuthUser>;
+  deleteProject?: Maybe<Project>;
+  signin: AuthUser;
+  signup: AuthUser;
 };
 
 
 export type MutationCreateProjectArgs = {
   input: ProjectInput;
+};
+
+
+export type MutationDeleteProjectArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -72,12 +78,12 @@ export type MutationSignupArgs = {
 
 export type Project = {
   __typename?: 'Project';
-  _id: Scalars['ObjectId']['output'];
-  author: Scalars['ObjectId']['output'];
+  _id: Scalars['ID']['output'];
+  author: Scalars['ID']['output'];
   content?: Maybe<Array<ContentBlock>>;
   cover: Scalars['String']['output'];
   createdAt: Scalars['Date']['output'];
-  creators?: Maybe<Array<Maybe<Scalars['ObjectId']['output']>>>;
+  creators?: Maybe<Array<Maybe<Scalars['ID']['output']>>>;
   description?: Maybe<Scalars['String']['output']>;
   published: Scalars['Boolean']['output'];
   slug: Scalars['String']['output'];
@@ -109,13 +115,13 @@ export type Settings = {
 
 export type User = {
   __typename?: 'User';
-  _id: Scalars['ObjectId']['output'];
+  _id: Scalars['ID']['output'];
   createdAt: Scalars['Date']['output'];
   email: Scalars['String']['output'];
   firstName?: Maybe<Scalars['String']['output']>;
   lastName?: Maybe<Scalars['String']['output']>;
   password: Scalars['String']['output'];
-  projects?: Maybe<Array<Maybe<Project>>>;
+  projects?: Maybe<Array<Maybe<Scalars['ID']['output']>>>;
   settings?: Maybe<Settings>;
   updatedAt: Scalars['Date']['output'];
   verified?: Maybe<Scalars['Boolean']['output']>;
@@ -231,12 +237,12 @@ export type ResolversParentTypes = ResolversObject<{
 
 export type AuthUserResolvers<ContextType = any, ParentType extends ResolversParentTypes['AuthUser'] = ResolversParentTypes['AuthUser']> = ResolversObject<{
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type ContentBlockResolvers<ContextType = any, ParentType extends ResolversParentTypes['ContentBlock'] = ResolversParentTypes['ContentBlock']> = ResolversObject<{
-  _id?: Resolver<ResolversTypes['ObjectId'], ParentType, ContextType>;
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   format?: Resolver<ResolversTypes['ContentFormat'], ParentType, ContextType>;
   order?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -251,8 +257,9 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   _?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   createProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationCreateProjectArgs, 'input'>>;
-  signin?: Resolver<Maybe<ResolversTypes['AuthUser']>, ParentType, ContextType, RequireFields<MutationSigninArgs, 'email' | 'password'>>;
-  signup?: Resolver<Maybe<ResolversTypes['AuthUser']>, ParentType, ContextType, RequireFields<MutationSignupArgs, 'email' | 'password'>>;
+  deleteProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
+  signin?: Resolver<ResolversTypes['AuthUser'], ParentType, ContextType, RequireFields<MutationSigninArgs, 'email' | 'password'>>;
+  signup?: Resolver<ResolversTypes['AuthUser'], ParentType, ContextType, RequireFields<MutationSignupArgs, 'email' | 'password'>>;
 }>;
 
 export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['ObjectId'], any> {
@@ -260,12 +267,12 @@ export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 }
 
 export type ProjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['Project'] = ResolversParentTypes['Project']> = ResolversObject<{
-  _id?: Resolver<ResolversTypes['ObjectId'], ParentType, ContextType>;
-  author?: Resolver<ResolversTypes['ObjectId'], ParentType, ContextType>;
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  author?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   content?: Resolver<Maybe<Array<ResolversTypes['ContentBlock']>>, ParentType, ContextType>;
   cover?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-  creators?: Resolver<Maybe<Array<Maybe<ResolversTypes['ObjectId']>>>, ParentType, ContextType>;
+  creators?: Resolver<Maybe<Array<Maybe<ResolversTypes['ID']>>>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   published?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -289,13 +296,13 @@ export type SettingsResolvers<ContextType = any, ParentType extends ResolversPar
 }>;
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
-  _id?: Resolver<ResolversTypes['ObjectId'], ParentType, ContextType>;
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType>;
+  projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['ID']>>>, ParentType, ContextType>;
   settings?: Resolver<Maybe<ResolversTypes['Settings']>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   verified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
